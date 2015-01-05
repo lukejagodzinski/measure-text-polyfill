@@ -18,28 +18,49 @@
 <body>
   <script src="measuretext.js"></script>
   <script>
-    var drawBoundings = function(ctx, x, y, m) {
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+    var drawMetrics = function(ctx, x, y, m) {
+      ctx.strokeStyle = 'rgba(0, 255, 0, 0.5)';
+
+      var left = x - m.actualBoundingBoxLeft;
+      var top = y;
+      var width = m.actualBoundingBoxLeft + m.actualBoundingBoxRight;
 
       ctx.strokeRect(
-        x + m.actualBoundingBoxLeft,
-        y - m.actualBoundingBoxAscent,
-        m.actualBoundingBoxRight,
-        m.actualBoundingBoxAscent
+        left,
+        top,
+        width,
+        -m.actualBoundingBoxAscent
       );
 
       ctx.strokeRect(
-        x + m.actualBoundingBoxLeft,
-        y,
-        m.actualBoundingBoxRight,
+        left,
+        top,
+        width,
         m.actualBoundingBoxDescent
+      );
+
+      ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+
+      ctx.strokeRect(
+        left,
+        top,
+        width,
+        -m.fontBoundingBoxAscent
+      );
+
+      ctx.strokeRect(
+        left,
+        top,
+        width,
+        m.fontBoundingBoxDescent
       );
     };
 
     var text = 'AbcŃ|ąypq';
+    // text = 'Abcd';
     var width = 1200;
     var height = 400;
-    var x = 50;
+    var x = 600;
     var y = 250;
 
     var canvas = document.createElement('canvas');
@@ -48,12 +69,14 @@
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d');
 
-    ctx.font = '200px Arial';
-    ctx.textAlign = 'left';
+    ctx.font = '200px Roboto-Thin';
+    // ctx.textAlign = 'left';
+    ctx.textAlign = 'center';
+    // ctx.textAlign = 'right';
     ctx.fillText(text, x, y);
 
     var metrics = ctx.measureText(text);
-    drawBoundings(ctx, x, y, metrics);
+    drawMetrics(ctx, x, y, metrics);
   </script>
 </body>
 
