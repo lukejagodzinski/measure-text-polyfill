@@ -232,6 +232,6 @@
   });
 
   CanvasRenderingContext2D.prototype.measureText = function(text) {
-    return new TextMetrics(ctx, text);
+    return new TextMetrics(this, text);
   };
 }());
