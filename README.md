@@ -4,5 +4,5 @@ This polyfill is based on two projects from [@Pomax](https://github.com/Pomax/fo
 
 ## TODO
 
-- Take `textAlign` property into account in calculations
+- ~~Take `textAlign` property into account in calculations~~ (DONE)
 - Support for `fontBoundingBoxAscent` and `fontBoundingBoxDescent` properties
